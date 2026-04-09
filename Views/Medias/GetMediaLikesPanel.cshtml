@@ -1,0 +1,19 @@
+﻿@model Models.Media
+
+@{
+    string likedUsers = Model.LikedUsers.Any()
+        ? "Usagers qui ont aimé :\n" + string.Join("\n", Model.LikedUsers.Select(u => u.Name))
+        : "Aucun j'aime";
+}
+
+<div style="display:grid; grid-template-columns:auto 20px; align-items:last baseline; margin-right:8px;">
+    <span class="cmdIcon" style="font-size:1.1em" title="@likedUsers">
+        @Model.LikesCount
+    </span>
+
+    <i class="cmdIcon @(Model.LikedByConnectedUser ? "fa-solid" : "fa-regular") fa-thumbs-up toggleLikeCmd"
+       mediaid="@Model.Id"
+       title="@likedUsers"
+       style="color:@(Model.LikedByConnectedUser ? "dodgerblue" : "blue")">
+    </i>
+</div>

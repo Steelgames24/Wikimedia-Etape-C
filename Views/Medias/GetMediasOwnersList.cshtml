@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Models.MediaOwnerOption>
+
+@{
+    int selectedOwnerId = Session["SelectedOwnerId"] != null ? (int)Session["SelectedOwnerId"] : 0;
+}
+
+<select id="ownerSelect" class="form-control ellipsis">
+    <option value="0" @(selectedOwnerId == 0 ? "selected" : "")>Tous les usagers</option>
+    @foreach (var user in Model)
+    {
+        <option value="@user.Id" @(selectedOwnerId == user.Id ? "selected" : "")>
+            @user.Name (@user.Count)
+        </option>
+    }
+</select>
